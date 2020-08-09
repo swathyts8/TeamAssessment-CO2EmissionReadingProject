@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,21 +27,21 @@ public class CustomerController {
 	CustomerService customerService;
 	
 	//Get all data
-	@GetMapping(value = "/")
+	@GetMapping(value = "/", produces = { "application/xml", "text/xml" }, consumes = MediaType.ALL_VALUE)
     public ResponseEntity<List<CustomerEntity>> getAllSensorData() throws RecordNotFoundException {
 		List<CustomerEntity> customerEntities = customerService.getAllSensorData();
         return new ResponseEntity<List<CustomerEntity>>(customerEntities, new HttpHeaders(), HttpStatus.OK);
     }
 	
 	//Get CO2 emission reading against a customer
-	@GetMapping("/{id}")
+	@GetMapping(value = "/{id}", produces = { "application/xml", "text/xml" }, consumes = MediaType.ALL_VALUE)
     public ResponseEntity<CustomerEntity> getSensorDataByCustomerId(@PathVariable("id") Integer id) throws RecordNotFoundException {
 		CustomerEntity customerEntity = customerService.getSensorDataByCustomerId(id);
         return new ResponseEntity<CustomerEntity>(customerEntity, new HttpHeaders(), HttpStatus.OK);
     }
 	
 	//Get CO2 emission reading against a city
-	@GetMapping("{customerid}/city/{cityid}")
+	@GetMapping(value = "{customerid}/city/{cityid}", produces = { "application/xml", "text/xml" }, consumes = MediaType.ALL_VALUE)
     public ResponseEntity<CityEntity> getSensorDataByCityId(@PathVariable("customerid") Integer customer_id,
     		@PathVariable("cityid") Integer city_id) throws RecordNotFoundException {
 		CityEntity cityEntity = customerService.getSensorDataByCityId(customer_id, city_id);
@@ -48,7 +49,7 @@ public class CustomerController {
     }
 	
 	//Get CO2 emission reading against a district
-	@GetMapping("/{customerid}/city/{cityid}/district/{districtid}") 
+	@GetMapping(value = "/{customerid}/city/{cityid}/district/{districtid}", produces = { "application/xml", "text/xml" }, consumes = MediaType.ALL_VALUE) 
 	public ResponseEntity<DistrictEntity> getSensorDataByDistrictId(@PathVariable("customerid") Integer customer_id, 
 			@PathVariable("cityid") Integer city_id, @PathVariable("districtid") Integer district_id) throws RecordNotFoundException { 
 		DistrictEntity districtEntity = customerService.getSensorDataByDistrictId(customer_id, city_id, district_id); 
