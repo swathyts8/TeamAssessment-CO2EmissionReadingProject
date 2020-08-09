@@ -1,6 +1,5 @@
 package com.allianz.teamchallenge.service;
 
-import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,11 +65,11 @@ public class CustomerService {
   	
   	//Save customer, city, district and sensor data to CB
   	public CustomerEntity createCustomers(CustomerEntity customer) throws RecordNotFoundException
-    {
+  	{
   		if(!(customer == null)) {
   			return customerRepository.save(customer);
   		} else {
   			throw new RecordNotFoundException("Insert in proper format"); 
   		}
-    }
+  	}
 }

@@ -35,7 +35,7 @@ public class CustomerController {
 	
 	//Get CO2 emission reading against a customer
 	@GetMapping(value = "/{id}", produces = { "application/xml", "text/xml" }, consumes = MediaType.ALL_VALUE)
-    public ResponseEntity<CustomerEntity> getSensorDataByCustomerId(@PathVariable("id") Integer id) throws RecordNotFoundException {
+	public ResponseEntity<CustomerEntity> getSensorDataByCustomerId(@PathVariable("id") Integer id) throws RecordNotFoundException {
 		CustomerEntity customerEntity = customerService.getSensorDataByCustomerId(id);
         return new ResponseEntity<CustomerEntity>(customerEntity, new HttpHeaders(), HttpStatus.OK);
     }
